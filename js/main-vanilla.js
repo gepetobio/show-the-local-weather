@@ -10,7 +10,6 @@ let tempDescription;
 const getApiUrl = (lat, lon) => 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=98213889a026966c20b230d9f338821f';
 
 const geoSuccess = position => {
-
   startPos = position;
   lat = startPos.coords.latitude;
   lon = startPos.coords.longitude;
@@ -27,9 +26,7 @@ const makeRequest = (type, url, callback) => {
 
   req.onreadystatechange = () => {
     if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
-
       callback(req.responseText);
-
     }
   }
   req.send(null);
@@ -39,7 +36,7 @@ const setNodeContents = (node, content) => {
   document.querySelector(node).innerHTML = content;
 }
 
-const formatTemp = x => Number.parseFloat(x).toFixed(2);
+const formatTemp = x => Number.parseFloat(x).toFixed(1);
 
 const updateTempDashboard = (city, temp, desc) => {
   document.querySelector('#loading').remove();
@@ -52,17 +49,28 @@ const getCelsius = tempKelvin => formatTemp(tempKelvin - 273);
 
 const getFahrenheit = tempKelvin => formatTemp(1.8 * (tempKelvin - 273) + 32);
 
+const handleToggleTemp = () => {
+  console.log('clicked');
+  if(isCelsius) {
+    setNodeContents('.temp', tempF + ' ºF');
+  } else {
+    setNodeContents('.temp', tempC + ' ºC');
+  }
+  isCelsius = !isCelsius;
+}
+
 const handleWeather = (data) => {
-  // console.log(data);
   const obj = JSON.parse(data);
   city = obj.name;
   tempKelvin = obj.main.temp;
   tempF = getFahrenheit(tempKelvin);
   tempC = getCelsius(tempKelvin);
   tempDescription = obj.weather[0].main;
+  
+  document.querySelector('.temp').addEventListener('click', handleToggleTemp);
 
-  updateTempDashboard(city, tempC, tempDescription)
-
+  updateTempDashboard(city, tempC, tempDescription);
+  
 }
 
 // check for Geolocation support
