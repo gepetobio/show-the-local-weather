@@ -3,11 +3,14 @@ let lat;
 let lon;
 let isCelsius = true;
 let city;
+let country;
 let tempKelvin;
 let tempF;
 let tempC;
 let tempDescription;
+let icon;
 const getApiUrl = (lat, lon) => 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=98213889a026966c20b230d9f338821f';
+const getIconUrl = code => `http://openweathermap.org/img/w/${code}.png`;
 
 const geoSuccess = position => {
   startPos = position;
@@ -36,13 +39,20 @@ const setNodeContents = (node, content) => {
   document.querySelector(node).innerHTML = content;
 }
 
+const setImage = (node, src, altTag) => {
+  document.querySelector(node).src = src;
+  document.querySelector(node).alt = altTag;
+}
+
 const formatTemp = x => Number.parseFloat(x).toFixed(1);
 
-const updateTempDashboard = (city, temp, desc) => {
+const updateTempDashboard = (city, country, temp, desc, icon) => {
   document.querySelector('#loading').remove();
   setNodeContents('.city', city);
-  setNodeContents('.temp', temp + ' ºC');
+  setNodeContents('.country', `, ${country}`);
+  setNodeContents('.temp', `${temp} ºC`);
   setNodeContents('.desc', desc);
+  setImage('.icon', icon, desc);
 }
 
 const getCelsius = tempKelvin => formatTemp(tempKelvin - 273);
@@ -60,16 +70,21 @@ const handleToggleTemp = () => {
 }
 
 const handleWeather = (data) => {
+  // console.log(data);
   const obj = JSON.parse(data);
   city = obj.name;
+  country = obj.sys.country;
   tempKelvin = obj.main.temp;
   tempF = getFahrenheit(tempKelvin);
   tempC = getCelsius(tempKelvin);
   tempDescription = obj.weather[0].main;
+  icon = getIconUrl(obj.weather[0].icon);
+
+  console.log(icon);
   
   document.querySelector('.temp').addEventListener('click', handleToggleTemp);
 
-  updateTempDashboard(city, tempC, tempDescription);
+  updateTempDashboard(city, country, tempC, tempDescription, icon);
   
 }
 

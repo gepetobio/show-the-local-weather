@@ -98,6 +98,7 @@ textarea {
    ========================================================================== */
 body {
     background: lightblue;
+    font-family: 'Jura', sans-serif;
 }
 .wrapper {
     margin: auto;
@@ -112,6 +113,7 @@ main {
 }
 .weatherWidget {
     text-align: center;
+    font-size: 2rem;
 }
 .temp {
     cursor: pointer;
@@ -122,7 +124,12 @@ main {
     left: 0;
     background: #000;
     width: 100%;
-
+    color: #fff;
+    text-align: center;
+    font-size: .75rem;
+}
+.mainFooter a {
+    color: #fff;
 }
 
 
