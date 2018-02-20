@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Show the Local Weather - Vanilla Javascript</title>
-    <meta name="description" content="Yet another local weather app in Vanilla JavaScript">
+    <title>Show the Local Weather - jQuery</title>
+    <meta name="description" content="Yet another local weather app in jQuery">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="manifest" href="site.webmanifest">
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jura:600">
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/main.css">
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 </head>
 
 <body>
@@ -26,7 +27,8 @@
             <div class="weatherWidget">
                 <div id="loading">Loading...</div>
                 <div class="place">
-                    <span class="city"></span><span class="country"></span>
+                    <span class="city"></span>
+                    <span class="country"></span>
                 </div>
                 <div class="temp"></div>
                 <div class="desc"></div>
@@ -36,10 +38,13 @@
     </main>
     <footer class="mainFooter">
         <div class="wrapper">
-            <p>Built by <a href="http://www.gledsleymuller.com" target="_blank">Gledsley Müller</a></p>
+            <p>Built by
+                <a href="http://www.gledsleymuller.com" target="_blank">Gledsley Müller</a>
+            </p>
         </div>
     </footer>
-    <script src="../js/main-vanilla.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../js/main-jquery.js"></script>
 
 </body>
 

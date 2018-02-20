@@ -77,12 +77,10 @@ const handleWeather = (data) => {
   tempC = getCelsius(tempKelvin);
   tempDescription = obj.weather[0].main;
   icon = getIconUrl(obj.weather[0].icon);
-
   
   document.querySelector('.temp').addEventListener('click', handleToggleTemp);
 
   updateTempDashboard(city, country, tempC, tempDescription, icon);
-  
 }
 
 // check for Geolocation support
