@@ -1,0 +1,54 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Show the Local Weather - jQuery</title>
+    <meta name="description" content="Yet another local weather app in jQuery">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jura:600">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body>
+    <div id="root"></div>
+    
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script src="https://unpkg.com/axios@0.16.2/dist/axios.min.js"></script>
+    
+<script type="text/babel">
+    
+    const getApiUrl = (lat, lon) => 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=98213889a026966c20b230d9f338821f';
+    const getIconUrl = code => `http://openweathermap.org/img/w/${code}.png`;
+
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+            //this.state = {
+                //startPos,
+                //lat,
+                //lon,
+                //isCelsius: true,
+                //city,
+                //country,
+                //tempKelvin,
+                //tempF,
+                //tempC,
+                //tempDescription,
+                //icon,
+            //};
+        }
+    }
+</script>
+
+</body>
+
+</html>
