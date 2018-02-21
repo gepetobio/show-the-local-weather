@@ -60,7 +60,6 @@ const getCelsius = tempKelvin => formatTemp(tempKelvin - 273);
 const getFahrenheit = tempKelvin => formatTemp(1.8 * (tempKelvin - 273) + 32);
 
 const handleToggleTemp = () => {
-  console.log('clicked');
   if(isCelsius) {
     setNodeContents('.temp', tempF + ' ºF');
   } else {
@@ -70,7 +69,6 @@ const handleToggleTemp = () => {
 }
 
 const handleWeather = (data) => {
-  // console.log(data);
   const obj = JSON.parse(data);
   city = obj.name;
   country = obj.sys.country;
@@ -79,13 +77,10 @@ const handleWeather = (data) => {
   tempC = getCelsius(tempKelvin);
   tempDescription = obj.weather[0].main;
   icon = getIconUrl(obj.weather[0].icon);
-
-  console.log(icon);
   
   document.querySelector('.temp').addEventListener('click', handleToggleTemp);
 
   updateTempDashboard(city, country, tempC, tempDescription, icon);
-  
 }
 
 // check for Geolocation support
@@ -97,4 +92,6 @@ if (navigator.geolocation) {
 
   };
 
-} else { alert('Geolocation is not supported for this Browser/OS.'); }
+} else { 
+  alert('Geolocation is not supported for this Browser/OS.'); 
+}
