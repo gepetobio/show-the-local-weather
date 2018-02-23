@@ -60,11 +60,8 @@ const getCelsius = tempKelvin => formatTemp(tempKelvin - 273);
 const getFahrenheit = tempKelvin => formatTemp(1.8 * (tempKelvin - 273) + 32);
 
 const handleToggleTemp = () => {
-  if(isCelsius) {
-    setNodeContents('.temp', tempF + ' ºF');
-  } else {
-    setNodeContents('.temp', tempC + ' ºC');
-  }
+  let temp = isCelsius ? `${tempF} °F` : `${tempC} °C`;
+  setNodeContents('.temp', temp);
   isCelsius = !isCelsius;
 }
 

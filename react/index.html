@@ -32,21 +32,40 @@
     class App extends React.Component {
         constructor(props) {
             super(props);
-            //this.state = {
-                //startPos,
-                //lat,
-                //lon,
-                //isCelsius: true,
-                //city,
-                //country,
-                //tempKelvin,
-                //tempF,
-                //tempC,
-                //tempDescription,
-                //icon,
-            //};
+            this.state = {
+                startPos: '',
+                lat: '',
+                lon: '',
+                isCelsius: true,
+                city: '',
+                country: '',
+                tempKelvin: '',
+                tempF: '',
+                tempC: '',
+                tempDescription: '',
+                icon: '',
+            };
+        }
+
+        render() {
+            return (
+                <main>
+                    <div className="wrapper">
+                        <div className="weatherWidget">
+                            <div id="loading">Loading...</div>
+                            <div className="place">
+                                <span className="city">{this.state.city}</span><span className="country">{this.state.country}</span>
+                            </div>
+                            <div className="temp">{this.state.temp}</div>
+                            <div className="desc">{this.state.description}</div>
+                            <img className="icon" src="{this.state.icon}" alt="{this.state.tempDescription}" />
+                        </div>
+                    </div>
+                </main>
+            );
         }
     }
+
 </script>
 
 </body>
