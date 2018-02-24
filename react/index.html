@@ -28,6 +28,16 @@
     
     const getApiUrl = (lat, lon) => 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=98213889a026966c20b230d9f338821f';
     const getIconUrl = code => `http://openweathermap.org/img/w/${code}.png`;
+    const getGeolocation = () => {
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                return {
+                    lat: position.coords.latitude, 
+                    lon: position.coords.longitude
+                };
+            });
+        }
+    };
 
     class App extends React.Component {
         constructor(props) {
@@ -45,6 +55,10 @@
                 tempDescription: '',
                 icon: '',
             };
+        }
+
+        componentDidMount() {
+            console.log('before', getGeolocation(), 'after');
         }
 
         render() {
@@ -65,6 +79,11 @@
             );
         }
     }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+    )
 
 </script>
 
