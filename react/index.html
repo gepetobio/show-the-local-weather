@@ -30,14 +30,32 @@
     const getIconUrl = code => `http://openweathermap.org/img/w/${code}.png`;
     const getGeolocation = () => {
         if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                return {
-                    lat: position.coords.latitude, 
-                    lon: position.coords.longitude
-                };
+            const geolocation = navigator.geolocation;
+            const location = new Promise((resolve, reject) => {
+                if (!geolocation) {
+                    reject(new Error('GeoLocation not supported'));
+                }
+                geolocation.getCurrentPosition(position => {
+                    resolve(position);
+                }, () => {
+                    reject(new Error('Permission denied'));
+                });
+
+                return location;
             });
         }
     };
+
+     const WeatherWidget = props => (
+        <div>
+            <div className="place">
+                <span className="city">{props.city}</span><span className="country">{props.country}</span>
+            </div>
+            <div className="temp">{props.temp}</div>
+            <div className="desc">{props.description}</div>
+            <img className="icon" src="{props.icon}" alt="{props.tempDescription}" />
+        </div>
+    );
 
     class App extends React.Component {
         constructor(props) {
@@ -54,11 +72,13 @@
                 tempC: '',
                 tempDescription: '',
                 icon: '',
+                isLocationLoaded: false,
             };
         }
 
         componentDidMount() {
-            console.log('before', getGeolocation(), 'after');
+            let loc = getGeolocation();
+            console.log('before', loc, 'after');
         }
 
         render() {
@@ -66,19 +86,20 @@
                 <main>
                     <div className="wrapper">
                         <div className="weatherWidget">
-                            <div id="loading">Loading...</div>
-                            <div className="place">
-                                <span className="city">{this.state.city}</span><span className="country">{this.state.country}</span>
-                            </div>
-                            <div className="temp">{this.state.temp}</div>
-                            <div className="desc">{this.state.description}</div>
-                            <img className="icon" src="{this.state.icon}" alt="{this.state.tempDescription}" />
+                            
+                            {this.state.isLocationLoaded ? (
+                                <WeatherWidget  />
+                            )
+                                : <div id="loading">Loading...</div>
+                            }
                         </div>
                     </div>
                 </main>
             );
         }
     }
+
+   
 
     ReactDOM.render(
         <App />,
